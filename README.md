@@ -1,1 +1,1 @@
-# Xilinx-Guide
+# Xilinx 설치 가이드
