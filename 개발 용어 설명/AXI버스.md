@@ -51,27 +51,21 @@ R과 W는 DATA에 대한 `R/W`
  
 
 ### 1. `master`가 `slave`에 데이터를 전송하는 방법
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F997F93335A0723E508">
 
-
-`master`가 `slave`에게 데이터를 보낼 때 `T2`에서와 같이 address와 control information을 전송한다. 이에 따라 `slave`는 ready신호를 통해 받을 준비가 되었다고 신호를 준다. 이 때 `BREADY` 시그널이 `HIGH`가 된다.
-
-ready신호가 `master`에게 전해지게 되면 데이터의 전송이 시작된다
-
-`T9`에서 보게 되면 데이터의 전송이 종료 되었으므로 `WLAST`의 값이 전송이 되었다.
-
-`WLAST`의 값을 받은 `slave`는 transaction이 완료 되었다는 의미의 `BRESP`신호를 보내게 되고 동시에 `BREADY`의 신호가 `LOW`가 된다.
+1. `master`가 `slave`에게 데이터를 보낼 때 `T2`에서와 같이 address와 control information을 전송한다. 이에 따라 `slave`는 ready신호를 통해 받을 준비가 되었다고 신호를 준다. 이 때 `BREADY` 시그널이 `HIGH`가 된다.
+2. ready신호가 `master`에게 전해지게 되면 데이터의 전송이 시작된다
+3. `T9`에서 보게 되면 데이터의 전송이 종료 되었으므로 `WLAST`의 값이 전송이 되었다.
+4. `WLAST`의 값을 받은 `slave`는 transaction이 완료 되었다는 의미의 `BRESP`신호를 보내게 되고 동시에 `BREADY`의 신호가 `LOW`가 된다.
  
 ### 2. `slave`가 `master`에게 데이터를 전송하는 방법
 
-
-`T0`에서 control information(`ARVALID`)의 값이 `HIGH`가 되고 `slave`의 `ARREADY`의 값이 `low`로 바뀌는 순간 address를 전송하고 `ARVALID`의 값은 `low`가 된다.
-
-`T3`사이클을 보게 되면 RREADY가 HIGH를 유지하고 있는데 이는 master가 data를 읽을 준비가 되어 있다는 의미이다. `T6`에서 데이터를 전송하자 `RREADY`는 다시 `low`로 떨어진다. 
-
-`T7`에서 다시 `RREADY`는 `HIGH`가 되고 앞의 방법과 동일하게 데이터를 읽는다.
-
-`T13`에서는 `RLAST`의 값이 `HIGH`가 되어 `slave`의 데이터 전송이 종료 되었음을 알리고 `RREADY`는 `low`가 된다.
-
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99B167335A0723E536">
+1. `T0`에서 control information(`ARVALID`)의 값이 `HIGH`가 되고 `slave`의 `ARREADY`의 값이 `low`로 바뀌는 순간 address를 전송하고 `ARVALID`의 값은 `low`가 된다.
+2. `T3`사이클을 보게 되면 RREADY가 HIGH를 유지하고 있는데 이는 master가 data를 읽을 준비가 되어 있다는 의미이다. `T6`에서 데이터를 전송하자 `RREADY`는 다시 `low`로 떨어진다. 
+3. `T7`에서 다시 `RREADY`는 `HIGH`가 되고 앞의 방법과 동일하게 데이터를 읽는다.
+4. `T13`에서는 `RLAST`의 값이 `HIGH`가 되어 `slave`의 데이터 전송이 종료 되었음을 알리고 `RREADY`는 `low`가 된다.
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F993BA6335A0723E52C">
 위의 그림은 `A`프로세서와 `B`프로세서가 동시에 데이터를 전송하는 모습을 보여준 그래프이다. `A`는 address를 전송해 주지만 data를 모두 전송하지 않은 상태에서 `B`의 address를 전송해 준다. 이 후 `A`의 data가 모두 전송이 된 후 `B`의 데이터가 이어서 전송이 되는 것을 볼 수 있다. 이와 같은 점이 AXI가 채널의 개념을 가짐으로 써 address채널과 data채널이 분리되어 갖는 장점이다.
 
  
