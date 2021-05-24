@@ -66,6 +66,7 @@ R과 W는 DATA에 대한 `R/W`
 3. `T7`에서 다시 `RREADY`는 `HIGH`가 되고 앞의 방법과 동일하게 데이터를 읽는다.
 4. `T13`에서는 `RLAST`의 값이 `HIGH`가 되어 `slave`의 데이터 전송이 종료 되었음을 알리고 `RREADY`는 `low`가 된다.
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F993BA6335A0723E52C">
+
 위의 그림은 `A`프로세서와 `B`프로세서가 동시에 데이터를 전송하는 모습을 보여준 그래프이다. `A`는 address를 전송해 주지만 data를 모두 전송하지 않은 상태에서 `B`의 address를 전송해 준다. 이 후 `A`의 data가 모두 전송이 된 후 `B`의 데이터가 이어서 전송이 되는 것을 볼 수 있다. 이와 같은 점이 AXI가 채널의 개념을 가짐으로 써 address채널과 data채널이 분리되어 갖는 장점이다.
 
  
