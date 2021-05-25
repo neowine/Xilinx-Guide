@@ -61,6 +61,7 @@ R과 W는 DATA에 대한 `R/W`
 ### 2. `slave`가 `master`에게 데이터를 전송하는 방법
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99B167335A0723E536">
+
 1. `T0`에서 control information(`ARVALID`)의 값이 `HIGH`가 되고 `slave`의 `ARREADY`의 값이 `low`로 바뀌는 순간 address를 전송하고 `ARVALID`의 값은 `low`가 된다.
 2. `T3`사이클을 보게 되면 RREADY가 HIGH를 유지하고 있는데 이는 master가 data를 읽을 준비가 되어 있다는 의미이다. `T6`에서 데이터를 전송하자 `RREADY`는 다시 `low`로 떨어진다. 
 3. `T7`에서 다시 `RREADY`는 `HIGH`가 되고 앞의 방법과 동일하게 데이터를 읽는다.
